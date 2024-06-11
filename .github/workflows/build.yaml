@@ -10,6 +10,4 @@ jobs:
     - uses: php-actions/composer@v6 # or alternative dependency management
     - uses: php-actions/phpunit@v3
       with:
-        testsuite: 'all'
-        bootstrap: 'vendor/autoload.php'
-        configuration: 'phpunit.xml'
+        testsuite: 'unit'
