@@ -12,4 +12,4 @@ jobs:
       with:
         testsuite: 'all'
         bootstrap: 'vendor/autoload.php'
-        configuration: 'tests/phpunit.xml'
+        configuration: 'phpunit.xml'
