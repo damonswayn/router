@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Shruubi\Router\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Shruubi\Router\Impl\InMemoryRouterImpl;
 use Shruubi\Router\RouterInterface;
@@ -24,16 +25,18 @@ class RouterTests extends TestCase
         $this->assertNotNull($this->router);
     }
 
-    /**
-     * @param $route
-     * @param $expectedResponse
-     * @return void
-     * @dataProvider dataProvider
-     */
-    public function testRouter($route, $expectedResponse): void
+    #[DataProvider('dataProvider')]
+    public function testRouter(string $route, string $expectedResponse): void
     {
         $this->router->set($route, $expectedResponse);
         $this->assertEquals($expectedResponse, $this->router->get($route));
+    }
+
+    #[DataProvider('dataProvider')]
+    public function testRouterWithArrayAccessInterface(string $route, string $expectedResponse): void
+    {
+        $this->router[$route] = $expectedResponse;
+        $this->assertEquals($expectedResponse, $this->router[$route]);
     }
 
     public static function dataProvider(): array

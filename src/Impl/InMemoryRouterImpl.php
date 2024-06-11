@@ -8,6 +8,7 @@ use Shruubi\Router\RouterInterface;
 
 class InMemoryRouterImpl implements RouterInterface
 {
+    /** @var array<string, string|array> */
     private array $data;
 
     /**
@@ -80,5 +81,26 @@ class InMemoryRouterImpl implements RouterInterface
         }
 
         return $current;
+    }
+
+    public function offsetExists($offset): bool
+    {
+        $value = $this->get($offset);
+        return $value !== '';
+    }
+
+    public function offsetGet($offset): string
+    {
+        return $this->get($offset);
+    }
+
+    public function offsetSet($offset, $value): void
+    {
+        $this->set($offset, $value);
+    }
+
+    public function offsetUnset($offset): void
+    {
+        $this->set($offset, '');
     }
 }
