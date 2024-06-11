@@ -19,33 +19,46 @@ class RouterTests extends TestCase
     }
 
 
-    public function testXeroRouterCanBeCreated(): void
+    public function testRouterCanBeCreated(): void
     {
         $this->assertNotNull($this->router);
     }
 
-    public function testXeroRouterCanSetAResponseForARoute(): void
-    {
-        $this->router->set('/hello', 'hello world');
-        $this->assertEquals('hello world', $this->router->get('/hello'));
-    }
-
-    public function testXeroRouterCanSetAResponseForMultipleRoute(): void
-    {
-        $this->router->set('/hello', 'hello world');
-        $this->assertEquals('hello world', $this->router->get('/hello'));
-
-        $this->router->set('/person', 'bob dole');
-        $this->assertEquals('bob dole', $this->router->get('/person'));
-    }
-
     /**
+     * @param $route
+     * @param $expectedResponse
      * @return void
-     * @test
+     * @dataProvider dataProvider
      */
-    public function givenAXeroRouter_WhenIRequestTheRouteSlashFoo_ThenIExpectToGetBarAsAResponse(): void
+    public function testRouter($route, $expectedResponse): void
     {
-        $this->router->set('/foo', 'bar');
-        $this->assertEquals('bar', $this->router->get('/foo'));
+        $this->router->set($route, $expectedResponse);
+        $this->assertEquals($expectedResponse, $this->router->get($route));
+    }
+
+    public static function dataProvider(): array
+    {
+        return [
+            'given example case' => [
+                '/foo',
+                'bar'
+            ],
+            'basic case' => [
+                '/hello',
+                'world'
+            ],
+            'non existent route' => [
+                '/does-not-exist',
+                ''
+            ],
+            'empty route' => [
+                '',
+                '',
+            ],
+            'wildcard route' => [
+                '/foo/*/bar',
+                'baz'
+            ],
+        ];
     }
 }
