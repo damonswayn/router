@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Shruubi\Router\Tests\Unit;
 
+use JetBrains\PhpStorm\ArrayShape;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Shruubi\Router\Impl\InMemoryRouterImpl;
@@ -39,6 +40,9 @@ class RouterTests extends TestCase
         $this->assertEquals($expectedResponse, $this->router[$route]);
     }
 
+    /**
+     * @return array<string, string[]>
+     */
     public static function dataProvider(): array
     {
         return [
