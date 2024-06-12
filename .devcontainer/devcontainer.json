@@ -1,0 +1,22 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "felixfbecker.php-debug",
+        "felixfbecker.php-intellisense",
+        "felixfbecker.php-pack",
+        "bmewburn.vscode-intelephense-client",
+        "editorconfig.editorconfig",
+        "esbenp.prettier-vscode",
+        "ikappas.phpcs",
+        "junstyle.php-cs-fixer",
+        "neilbrayfield.php-docblocker"
+      ]
+    }
+  },
+  "forwardPorts": [],
+  "postCreateCommand": "composer install"
+}
